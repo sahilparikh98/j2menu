@@ -20,14 +20,19 @@ from bs4 import BeautifulSoup
 
 soup = BeautifulSoup(page, "html.parser")
 thing = soup.find_all(string="Vegetable Pot Pie")
-if thing:
+tomato = soup.find_all(string="Creamy Tomato Bisque Soup")
+if thing or tomato:
     msg = MIMEMultipart()
 
-    subscriberList = ['sparikh98@gmail.com', 'sparikh29@gmail.com', "alanzeng17@gmail.com", "akhil.amin.98@gmail.com"]
+    subscriberList = ['sparikh98@gmail.com', 'sparikh29@gmail.com', "alanzeng17@gmail.com", "akhil.amin.98@gmail.com", "avninandu98@gmail.com"]
 
     msg['From'] = 'j2menupotpie@gmail.com'
     msg['To'] = ",".join(subscriberList)
-    msg['Subject'] = "Vegetable pot pie today at J2"
+    if tomato:
+        subj = "Tomato Bisque Soup today at J2"
+    else:
+        subj = "Vegetable pot pie today at J2"
+    msg['Subject'] = subj
 
     s.sendmail('j2menupotpie@gmail.com', subscriberList, msg.as_string())
 
